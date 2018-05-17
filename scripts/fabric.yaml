@@ -1,0 +1,6 @@
+development:
+  repo:
+    url: https://github.com/goosechooser/benwaonline.git
+    branch: development
+    git-dir: /home/vagrant/benwaonline-prod
+    work-tree:  /home/vagrant/mock-prod/
