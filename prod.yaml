@@ -1,0 +1,15 @@
+hostname: benwaonline
+base_dir: $HOME/benwaonline-deploy-testing/
+
+git_url: https://github.com/goosechooser/benwaonline.git
+branch: development
+git_dir: repo
+work-tree: working
+
+envfile: benwaonline.env
+static_path: benwaonline/static/
+static_files:
+  - name: style.css
+    env: CSS
+  - name: scripts.js
+    env: JS
