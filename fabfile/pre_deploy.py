@@ -18,13 +18,13 @@ def update_file(c, config, f):
         last = git.last_commit(c, full)
 
     lc_file = format_last_commit(f['name'], last)
-    print('lc file', lc_file)
+
     with c.cd(config['work-tree']):
         staging_env = config['staging-dir'] + config['envfile']
         current_version = env.get(c, staging_env, f['env'])
-        print('current version', current_version)
         if lc_file != current_version:
-                env.set(c, staging_env, f['env'], lc_file)
-                c.run('cp {} {}'.format(config['static_path'] + f['name'], config['staging-dir'] + lc_file))
+            print('now updating {}'.format(f['name']))
+            env.set(c, staging_env, f['env'], lc_file)
+            c.run('cp {} {}'.format(config['static_path'] + f['name'], config['staging-dir'] + lc_file))
         else:
             print('{} already updated'.format(f['name']))
