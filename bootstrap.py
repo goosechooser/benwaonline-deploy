@@ -28,7 +28,7 @@ def setup(c, config):
 if __name__ == '__main__':
     hostname = sys.argv[1]
     config = utils.load_config('{}.yaml'.format(hostname))
-    c = Connection(config['hostname'])
+    c = Connection(hostname)
     cleanup(c, config)
     print('bootstrapping {}'.format(hostname))
     setup(c, config)
