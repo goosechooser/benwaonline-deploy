@@ -11,7 +11,7 @@ def move_file(c, fname, new_name):
 @task
 def backup(c, f, folder=False):
     r = '-r' if folder else ''
-    return c.run('cp {r} {f} {f}.bak'.format(f=f, r=r))
+    return c.run('cp {r} {f} {f}.bak'.format(f=f, r=r), warn=True)
 
 @task
 def move_static_contents(c, here, there):
