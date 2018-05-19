@@ -2,8 +2,8 @@ base-dir: $HOME/benwaonline-deploy-testing/
 
 git-url: https://github.com/goosechooser/benwaonline.git
 branch: development-deployment
-git-dir: repo
-work-tree: working
+git-dir: repo/
+work-tree: working/
 
 staging-dir: staging/
 envfile: benwaonline.env

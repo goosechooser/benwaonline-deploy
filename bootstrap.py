@@ -5,8 +5,12 @@ from fabfile import utils, git
 def cleanup(c, config):
     c.run('rm -rf {}'.format(config['base-dir']))
 
+def mock_prod(c):
+    c.run('mkdir static')
+    c.run('touch benwaonline.env')
+
 def setup(c, config):
-    result = c.run('mkdir {}'.format(config['base-dir']))
+    result = c.run('mkdir {}'.format(config['base-dir']), warn=True)
     print(utils.lazy_log(result))
 
     with c.cd(config['base-dir']):
@@ -21,6 +25,8 @@ def setup(c, config):
 
         with c.cd(config['work-tree']):
             c.run('mkdir {}'.format(config['staging-dir']))
+            with c.cd(config['staging-dir']):
+                c.run('mkdir static')
             c.run('cp {} {}'.format(config['envfile'], config['staging-dir'] + config['envfile']))
 
     print('Complete')
@@ -29,6 +35,10 @@ if __name__ == '__main__':
     hostname = sys.argv[1]
     config = utils.load_config('{}.yaml'.format(hostname))
     c = Connection(hostname)
-    cleanup(c, config)
+    if hostname != 'benwaonline':
+        cleanup(c, config)
+        with c.cd(config['base-dir']):
+            mock_prod(c)
+
     print('bootstrapping {}'.format(hostname))
     setup(c, config)
