@@ -11,7 +11,7 @@ def clone(c, url, dir):
 
 @task
 def init_bare(c, dir):
-    c.run('mkdir {}'.format(dir))
+    c.run('mkdir -p {}'.format(dir))
     with c.cd(dir):
         return c.run('git init --bare')
 

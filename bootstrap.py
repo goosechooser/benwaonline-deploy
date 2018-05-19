@@ -15,7 +15,7 @@ def setup(c, config):
 
     with c.cd(config['base-dir']):
         git.init_bare(c, config['git-dir'])
-        result = c.run('mkdir {}'.format(config['work-tree']))
+        result = c.run('mkdir -p {}'.format(config['work-tree']))
         print(utils.lazy_log(result))
 
         with c.cd(config['git-dir']):
@@ -37,6 +37,7 @@ if __name__ == '__main__':
     c = Connection(hostname)
     if hostname != 'benwaonline':
         cleanup(c, config)
+        c.run('mkdir {}'.format(config['base-dir']), warn=True)
         with c.cd(config['base-dir']):
             mock_prod(c)
 
