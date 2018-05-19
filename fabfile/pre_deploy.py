@@ -25,6 +25,6 @@ def update_file(c, config, f):
         if lc_file != current_version:
             print('now updating {}'.format(f['name']))
             env.set(c, staging_env, f['env'], lc_file)
-            c.run('cp {} {}'.format(config['static_path'] + f['name'], config['staging-dir'] + lc_file))
+            c.run('cp {} {}'.format(config['static_path'] + f['name'], config['staging-dir'] + 'static/' + lc_file))
         else:
             print('{} already updated'.format(f['name']))
